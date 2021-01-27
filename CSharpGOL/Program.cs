@@ -24,7 +24,7 @@ namespace CSharpGOL
             colSize = Console.WindowWidth / 2;
 
             simulation = new Simulation(rowSize, colSize);
-            renderer = new Renderer(ref simulation);
+            renderer = new Renderer(simulation);
 
             renderer.RefreshFrame();  
             

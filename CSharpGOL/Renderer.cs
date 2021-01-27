@@ -21,7 +21,7 @@ namespace CSharpGOL
 
         private Simulation simulation;
 
-        public Renderer(ref Simulation simulation)
+        public Renderer(Simulation simulation)
         {
             this.simulation = simulation;
 
