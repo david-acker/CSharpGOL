@@ -4,25 +4,15 @@ namespace CSharpGOL
     {
         public bool[,] state { get; private set; }
         
-        public int rowSize
-        {
-            get
-            {
-                return state.GetLength(0);
-            }
-        }
-        
-        public int colSize
-        {
-            get
-            {
-                return state.GetLength(1);
-            }
-        }
+        public readonly int rowSize;
+        public readonly int colSize;
 
         public Grid(bool[,] initialState)
         {
             state = initialState;
+
+            this.rowSize = state.GetLength(0);
+            this.colSize = state.GetLength(1);
         }
 
         public void InvertState(int row, int col)
