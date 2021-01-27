@@ -8,8 +8,8 @@ namespace CSharpGOL
         public readonly int rowSize;
         public readonly int colSize;
 
-        public Grid previousGrid { get; private set; }
-        public Grid currentGrid { get; private set; }
+        public Grid previousGrid;
+        public Grid currentGrid;
 
         private readonly List<Point>[,] neighborCoordinateArray;
         private int[,] livingNeighborsCountArray; 
@@ -21,8 +21,10 @@ namespace CSharpGOL
             this.rowSize = rowSize;
             this.colSize = colSize;
 
-            this.previousGrid = new Grid(rowSize, colSize);
-            this.currentGrid = new Grid(rowSize, colSize);
+            var seed = SeedGenerator.New(rowSize, colSize);
+
+            this.previousGrid = new Grid(seed);
+            this.currentGrid = new Grid(seed);
 
             neighborCoordinateArray = CreateNeighborCoordinateArray();
             livingNeighborsCountArray = new int[rowSize, colSize];

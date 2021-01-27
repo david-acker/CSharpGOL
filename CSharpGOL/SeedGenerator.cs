@@ -4,7 +4,7 @@ namespace CSharpGOL
 {
     public static class SeedGenerator
     {
-        public static bool[,] Create(int rowSize, int colSize)
+        public static bool[,] New(int rowSize, int colSize)
         {
             var rand = new Random();
 
@@ -30,7 +30,7 @@ namespace CSharpGOL
             int randInt = rand.Next(11);
             
             bool cellState = false;
-            if (randInt > density) { cellState = true; }
+            if (randInt < density) { cellState = true; }
 
             return cellState;
         }

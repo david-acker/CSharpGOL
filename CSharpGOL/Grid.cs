@@ -25,11 +25,6 @@ namespace CSharpGOL
             state = initialState;
         }
 
-        public Grid(int rowSize, int colSize)
-        {
-            state = SeedGenerator.Create(rowSize, colSize);
-        }
-
         public void InvertState(int row, int col)
         {
             state[row, col] = !state[row, col];
