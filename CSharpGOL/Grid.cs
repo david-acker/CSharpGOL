@@ -2,10 +2,23 @@ namespace CSharpGOL
 {
     public class Grid
     {
-        public readonly int rowSize;
-        public readonly int colSize;
-
-        public bool[,] state; 
+        public bool[,] state { get; private set; }
+        
+        public int rowSize
+        {
+            get
+            {
+                return state.GetLength(0);
+            }
+        }
+        
+        public int colSize
+        {
+            get
+            {
+                return state.GetLength(1);
+            }
+        }
 
         public Grid(bool[,] initialState)
         {
@@ -17,9 +30,9 @@ namespace CSharpGOL
             state = SeedGenerator.Create(rowSize, colSize);
         }
 
-        public void InvertState(int rowIndex, int colIndex)
+        public void InvertState(int row, int col)
         {
-            state[rowIndex, colIndex] = !state[rowIndex, colIndex];
+            state[row, col] = !state[row, col];
         }
 
         public void FlashFrom(Grid inputGrid)
