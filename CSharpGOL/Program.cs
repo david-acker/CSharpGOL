@@ -28,6 +28,8 @@ namespace CSharpGOL
 
             renderer.RefreshFrame();  
             
+            //Thread.Sleep(2000);
+
             while (true)
             {
                 stopWatch.Start();

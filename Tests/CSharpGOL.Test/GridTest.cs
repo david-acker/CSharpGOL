@@ -9,6 +9,47 @@ namespace CSharpGOL.Test
     public class GridTest
     {
         [Fact]
+        public void GridReturnsCorrectRowSize()
+        {
+            // Arrange
+            var initialState = new bool[3, 3]
+            {
+                { true,  false, true  },
+                { false, true,  false },
+                { true,  false, true  }
+            };
+
+            var grid = new Grid(initialState);
+
+
+            // Act
+            var gridRowSize = grid.rowSize;
+
+            // Assert
+            Assert.Equal(initialState.GetLength(0), gridRowSize);
+        }
+
+        [Fact]
+        public void GridReturnsCorrectColumnSize()
+        {
+            // Arrange
+            var initialState = new bool[3, 3]
+            {
+                { true,  false, true  },
+                { false, true,  false },
+                { true,  false, true  }
+            };
+
+            var grid = new Grid(initialState);
+
+            // Act
+            var gridColSize = grid.colSize;
+
+            // Assert
+            Assert.Equal(initialState.GetLength(1), gridColSize);
+        }
+
+        [Fact]
         public void GridStateInstantiatedFromInputBooleanArray()
         {
             // Arrange
@@ -92,45 +133,64 @@ namespace CSharpGOL.Test
         }
 
         [Fact]
-        public void GridReturnsCorrectRowSize()
+        public void CountsLivingNeighborsInSurroundingCells()
         {
             // Arrange
-            var initialState = new bool[3, 3]
+            var initialState = new bool[5, 5]
             {
-                { true,  false, true  },
-                { false, true,  false },
-                { true,  false, true  }
+                { false, false, true,  false, false },
+                { false, true,  true,  true,  false },
+                { false, false, false, false, true  },
+                { false, true,  false, false, false },
+                { false, false, false, false, false }
             };
 
             var grid = new Grid(initialState);
 
+            var firstExpectedNeighbors = 3;
+            var secondExpectedNeighbors = 4;
+            var thirdExpectedNeighbors = 2;
 
             // Act
-            var gridRowSize = grid.rowSize;
+            var firstActualNeighbors = grid.CountLivingNeighbors(2, 0);
+            var secondActualNeighbors = grid.CountLivingNeighbors(2, 2);
+            var thirdActualNeighbors = grid.CountLivingNeighbors(4, 2);
 
             // Assert
-            Assert.Equal(initialState.GetLength(0), gridRowSize);
+            Assert.Equal(firstExpectedNeighbors, firstActualNeighbors);
+            Assert.Equal(secondExpectedNeighbors, secondActualNeighbors);
+            Assert.Equal(thirdExpectedNeighbors, thirdActualNeighbors);
         }
 
         [Fact]
-        public void GridReturnsCorrectColumnSize()
+        public void UpdatesLivingNeighborsArrayWithCountsForEachCell()
         {
             // Arrange
-            var initialState = new bool[3, 3]
+            var initialState = new bool[5, 5]
             {
-                { true,  false, true  },
-                { false, true,  false },
-                { true,  false, true  }
+                { false, false, true,  false, false },
+                { false, true,  true,  true,  false },
+                { false, false, false, false, true  },
+                { false, true,  false, false, false },
+                { false, false, false, false, false }
             };
 
             var grid = new Grid(initialState);
 
+            var expectedLivingNeighbors = new int[5, 5]
+            {
+                { 1, 3, 3, 3, 1 },
+                { 2, 2, 3, 3, 2 },
+                { 3, 3, 4, 3, 1 },
+                { 2, 0, 1, 1, 1 },
+                { 1, 2, 2, 1, 0 }
+            };
+
             // Act
-            var gridColSize = grid.colSize;
+            grid.UpdateLivingNeighborsArray();
 
             // Assert
-            Assert.Equal(initialState.GetLength(1), gridColSize);
+            Assert.Equal(expectedLivingNeighbors, grid.livingNeighbors);
         }
-
     }
 }

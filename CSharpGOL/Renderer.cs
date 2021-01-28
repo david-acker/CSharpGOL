@@ -25,10 +25,10 @@ namespace CSharpGOL
         {
             this.simulation = simulation;
 
-            this.rowSize = simulation.rowSize;
-            this.colSize = simulation.colSize;
+            rowSize = simulation.rowSize;
+            colSize = simulation.colSize;
 
-            this.displayWidth = (colSize * 2);
+            displayWidth = (colSize * 2);
             footer = String.Concat(
                 Enumerable.Repeat(footerBase, displayWidth));
         }
