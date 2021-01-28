@@ -1,4 +1,4 @@
-using CustomExtensions;
+using CSharpGOL.Common;
 using System.Linq;
 using System;
 

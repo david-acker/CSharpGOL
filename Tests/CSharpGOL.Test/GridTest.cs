@@ -1,3 +1,4 @@
+using CSharpGOL;
 using System.Drawing;
 using System;
 using Xunit;
@@ -130,5 +131,6 @@ namespace CSharpGOL.Test
             // Assert
             Assert.Equal(initialState.GetLength(1), gridColSize);
         }
+
     }
 }

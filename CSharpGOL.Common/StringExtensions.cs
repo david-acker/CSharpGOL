@@ -1,4 +1,4 @@
-namespace CustomExtensions
+namespace CSharpGOL.Common
 {
     public static class StringExtensions
     {

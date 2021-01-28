@@ -1,3 +1,5 @@
+using CSharpGOL.Common;
+
 namespace CSharpGOL
 {
     public class Grid
@@ -34,8 +36,7 @@ namespace CSharpGOL
             {
                 for (int j = 0; j < colSize; j++)
                 {
-                    int neighborCount = CountLivingNeighbors(i, j);
-                    livingNeighbors[i, j] = neighborCount;
+                    livingNeighbors[i, j] = CountLivingNeighbors(i, j);
                 }
             }
         }
@@ -51,8 +52,8 @@ namespace CSharpGOL
                     if (rowShift == 0 && colShift == 0) { continue; }
                     else
                     {
-                        var rowMod = (row + rowShift + rowSize) % rowSize;
-                        var colMod = (col + colShift + colSize) % colSize;
+                        var rowMod = GridIndexHandler.Shift(row, rowShift, rowSize);
+                        var colMod = GridIndexHandler.Shift(col, colShift, colSize);
 
                         bool isAlive = state[rowMod, colMod];
                         if (isAlive) { aliveCount += 1; }
