@@ -15,7 +15,9 @@ To end the simulation and exit, use CTRL-C. CSharpGOL does not currently have an
 
 Note: Thus far, CSharpGOL has only been tested with the default GNOME Terminal for Ubuntu Desktop (Focal Fossa) and, therefore, may be displayed differently on other platforms.  
 
-<img align="center" width="888" height="562" src="https://github.com/david-acker/CSharpGOL/blob/main/CSharpGOL.gif">
+<p align="center">
+  <img width="888" height="562" src="https://github.com/david-acker/CSharpGOL/blob/main/CSharpGOL.gif">
+</p>
 
 [The Game of Life]: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 [John Horton Conway]: https://en.wikipedia.org/wiki/John_Horton_Conway
