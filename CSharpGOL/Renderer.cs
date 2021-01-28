@@ -9,8 +9,7 @@ namespace CSharpGOL
         const char iconLive = '\u25a0';
         const char iconDead = '\u2800';
 
-        const char headerBase = '\u2581';
-        const char footerBase = '\u2594';
+        const char borderBase = '\u2501';
 
         private readonly int rowSize;
         private readonly int colSize;
@@ -30,7 +29,7 @@ namespace CSharpGOL
 
             displayWidth = (colSize * 2);
             footer = String.Concat(
-                Enumerable.Repeat(footerBase, displayWidth));
+                Enumerable.Repeat(borderBase, displayWidth));
         }
 
         public void RefreshFrame()
@@ -53,8 +52,7 @@ namespace CSharpGOL
             }
 
             header = ConstructHeader(
-                simulation.generation.ToString(), displayWidth, headerBase) + "\n";
-
+                simulation.generation.ToString(), displayWidth, borderBase) + "\n";
             Console.WriteLine(header + frame + footer);
         }
 
