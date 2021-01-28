@@ -18,7 +18,7 @@ Note: Thus far, CSharpGOL has only been tested with the default GNOME Terminal f
 ---
 
 <p align="center">
-  <img width="888" height="562" src="https://github.com/david-acker/CSharpGOL/blob/main/CSharpGOL.gif">
+  <img width=100% height=auto src="https://github.com/david-acker/CSharpGOL/blob/main/CSharpGOL.gif">
 </p>
 
 [The Game of Life]: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
