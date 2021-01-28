@@ -5,10 +5,6 @@ namespace CSharpGOL.Test
 {
     public class SimulationTest
     {
-        [Fact]
-        public void Test1()
-        {
-
-        }
+        
     }
 }

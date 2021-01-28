@@ -11,9 +11,6 @@ namespace CSharpGOL
         public Grid previousGrid;
         public Grid currentGrid;
 
-        private readonly List<Point>[,] neighborCoordinateArray;
-        private int[,] livingNeighborsCountArray; 
-
         public int generation { get; private set; } = 0;
 
         public Simulation(int rowSize, int colSize)
@@ -25,118 +22,40 @@ namespace CSharpGOL
 
             this.previousGrid = new Grid(seed);
             this.currentGrid = new Grid(seed);
-
-            neighborCoordinateArray = CreateNeighborCoordinateArray();
-            livingNeighborsCountArray = new int[rowSize, colSize];
         }
 
         public Simulation(bool[,] initialState)
         {
             this.previousGrid = new Grid(initialState);
-            this.currentGrid = new Grid(initialState);
-            neighborCoordinateArray = CreateNeighborCoordinateArray();
-            livingNeighborsCountArray = new int[rowSize, colSize];        
+            this.currentGrid = new Grid(initialState);    
         }
 
         public void NextGeneration()
         {
             previousGrid.FlashFrom(currentGrid);
-            UpdateLivingNeighborsCountArray();
+            currentGrid.UpdateLivingNeighborsArray();
 
-            for (int row = 0; row < rowSize; row++)
+            for (int i = 0; i < rowSize; i++)
             {
-                for (int col = 0; col < colSize; col++)
+                for (int j = 0; j < colSize; j++)
                 {
-                    bool cellState = currentGrid.state[row, col];
-                    int neighborCount = livingNeighborsCountArray[row, col];
+                    bool cellState = currentGrid.state[i, j];
+                    int neighborCount = currentGrid.livingNeighbors[i, j];
 
                     if (cellState)
                     {
                         if (neighborCount < 2 || neighborCount > 3)
-                            currentGrid.InvertState(row, col);
+                            currentGrid.InvertState(i, j);
                     }
                     else
                     {
                         if (neighborCount == 3)
-                            currentGrid.InvertState(row, col);
-                    } 
+                            currentGrid.InvertState(i, j);
+                    }
                 }
             }
+            
             generation += 1;
-        }
-
-        public void UpdateLivingNeighborsCountArray()
-        {
-            for (int row = 0; row < rowSize; row++)
-            {
-                for (int col = 0; col < colSize; col++)
-                {
-                    livingNeighborsCountArray[row, col] = CountLivingNeighbors(row, col);
-                }
-            }
-        }
-
-        public int CountLivingNeighbors(int row, int col)
-        {
-            List<Point> cellNeighbors = neighborCoordinateArray[row, col]; 
-
-            int neighborsAlive = 0;
-            foreach (Point neighbor in cellNeighbors)
-            {
-                bool isAlive = currentGrid.state[neighbor.X, neighbor.Y];
-                if (isAlive) { neighborsAlive += 1; }
-            }
-            return neighborsAlive;
-        }
-
-        public List<Point> GetNeighborCoordinates(int row, int col)
-        {
-            // Calculate row indicies for positive & negative shifts
-            var rowShiftPositive = row + 1;
-            if (rowShiftPositive == rowSize) { rowShiftPositive = 0; }
-
-            var rowShiftNegative = row - 1;
-            if (rowShiftNegative < 0) { rowShiftNegative = rowSize - 1; }
-
-            // Calculate column indicies for positive & negative shifts
-            var colShiftPositive = col + 1;
-            if (colShiftPositive == colSize) { colShiftPositive = 0; }
-
-            var colShiftNegative = col - 1;
-            if (colShiftNegative < 0) { colShiftNegative = colSize - 1; }            
-
-            // Create neighbor points where X is row and Y is column
-            List<Point> neighborPointList = new List<Point>()
-            {
-                // Define points for vertical neighbors
-                new Point(rowShiftPositive, col),
-                new Point(rowShiftNegative, col),
-
-                // Define points for horizontal neighbors
-                new Point(row, colShiftPositive),
-                new Point(row, colShiftNegative),
-            
-                // Define points for diagonal neighbors
-                new Point(rowShiftPositive, colShiftPositive),
-                new Point(rowShiftPositive, colShiftNegative),
-                new Point(rowShiftNegative, colShiftPositive),
-                new Point(rowShiftNegative, colShiftNegative), 
-            };
-            return neighborPointList;            
-        }
-
-        public List<Point>[,] CreateNeighborCoordinateArray()
-        {
-            var coordinateArray = new List<Point>[rowSize, colSize];
-            
-            for (int row = 0; row < rowSize; row++)
-            {
-                for (int col = 0; col < colSize; col++)
-                {
-                    coordinateArray[row, col] = GetNeighborCoordinates(row, col);
-                }
-            }
-            return coordinateArray;
         }
     }
 }
