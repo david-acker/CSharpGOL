@@ -13,6 +13,8 @@ Each generation, the state of the current grid is converted to a display string 
 
 To end the simulation and exit, use CTRL-C. CSharpGOL does not currently have an automatic exit mechanism to detect when the grid for the simulation becomes completely static and unchanging, or becomes comprised only of still life and/or oscillator patterns. 
 
+Note: Thus far, CSharpGOL has only been tested with the default GNOME Terminal for Ubuntu Desktop (Focal Fossa) and, therefore, may be displayed differently on other platforms.  
+
 
 [The Game of Life]: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 [John Horton Conway]: https://en.wikipedia.org/wiki/John_Horton_Conway
