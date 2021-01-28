@@ -17,6 +17,8 @@ namespace CSharpGOL
             const int refreshMilliseconds = 100;
             Stopwatch stopWatch = new Stopwatch();
 
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
+
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.CursorVisible = false;
 
@@ -27,8 +29,6 @@ namespace CSharpGOL
             renderer = new Renderer(simulation);
 
             renderer.RefreshFrame();  
-            
-            //Thread.Sleep(2000);
 
             while (true)
             {
@@ -44,6 +44,12 @@ namespace CSharpGOL
                 stopWatch.Reset();
 
                 renderer.RefreshFrame();
+            }
+
+            static void Console_CancelKeyPress(object sender, EventArgs e)
+            {
+                Console.CursorVisible = true;
+                Environment.Exit(0);
             }
         }
     }
