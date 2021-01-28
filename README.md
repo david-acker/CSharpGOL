@@ -15,6 +15,8 @@ To end the simulation and exit, use CTRL-C. CSharpGOL does not currently have an
 
 Note: Thus far, CSharpGOL has only been tested with the default GNOME Terminal for Ubuntu Desktop (Focal Fossa) and, therefore, may be displayed differently on other platforms.  
 
+---
+
 <p align="center">
   <img width="888" height="562" src="https://github.com/david-acker/CSharpGOL/blob/main/CSharpGOL.gif">
 </p>
