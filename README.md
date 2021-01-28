@@ -2,7 +2,7 @@
 C# Implementation of Conway's Game of Life
 
 ## Background
-Implements the standard set rule of the [The Game of Life], the cellular automaton created by the late mathematician [John Horton Conway].
+Implements the standard rules for the [The Game of Life], the cellular automaton created by the late mathematician [John Horton Conway].
 
 ## Usage
 Once launched, CSharpGOL automatically determines the dimensions (height and width) of the terminal it was run in, and creates randomly an initial grid using these dimensions. The initial grid is populated by randomly setting cells as either alive or dead.
