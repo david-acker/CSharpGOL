@@ -1,5 +1,3 @@
-using CSharpGOL;
-using System;
 using Xunit;
 
 namespace CSharpGOL.Test
@@ -7,7 +5,7 @@ namespace CSharpGOL.Test
     public class SeedGeneratorTest
     {
         [Fact]
-        public void SeedIsABooleanArray()
+        public void GeneratedSeedIsABooleanArray()
         {
             // Arrange
             int rowSize = 5;
@@ -66,28 +64,6 @@ namespace CSharpGOL.Test
             Assert.Equal(firstColSize, firstSeed.GetLength(1));
             Assert.Equal(secondColSize, secondSeed.GetLength(1));
             Assert.Equal(thirdColSize, thirdSeed.GetLength(1));            
-        }
-
-        [Fact]
-        public void AllCellsInSeedHaveBooleanState()
-        {
-            // Arrange
-            int rowSize = 5;
-            int colSize = 5;
-
-            // Act
-            var seed = SeedGenerator.New(rowSize, colSize);
-
-            // Assert
-            for (int i = 0; i < seed.GetLength(0); i++)
-            {
-                for (int j = 0; j < seed.GetLength(1); j++)
-                {
-                    var cell = seed[i, j];
-
-                    Assert.IsType<bool>(cell);
-                }
-            }
         }
     }
 }
