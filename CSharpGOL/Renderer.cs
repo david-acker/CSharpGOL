@@ -1,6 +1,6 @@
-using CSharpGOL.Common;
-using System.Linq;
 using System;
+using System.Linq;
+using CSharpGOL.Common;
 
 namespace CSharpGOL
 {

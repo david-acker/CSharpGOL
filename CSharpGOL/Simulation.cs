@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Drawing;
-
 namespace CSharpGOL
 {
     public class Simulation
@@ -54,7 +51,7 @@ namespace CSharpGOL
                     }
                 }
             }
-            
+
             generation += 1;
         }
     }
