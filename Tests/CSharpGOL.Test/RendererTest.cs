@@ -1,4 +1,3 @@
-using CSharpGOL;
 using System;
 using Xunit;
 

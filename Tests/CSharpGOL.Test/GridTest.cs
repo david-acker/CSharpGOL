@@ -1,8 +1,6 @@
-using CSharpGOL;
-using System.Drawing;
-using System;
-using Xunit;
 using System.Collections.Generic;
+using System.Drawing;
+using Xunit;
 
 namespace CSharpGOL.Test
 {

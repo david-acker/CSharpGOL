@@ -4,6 +4,7 @@ using CSharpGOL.Common;
 
 namespace CSharpGOL
 {
+    /// <summary>Produces graphical representations of the Grid from a Simulation</summary>
     public class Renderer
     {
         const char iconLive = '\u25a0';
@@ -22,6 +23,7 @@ namespace CSharpGOL
 
         private Simulation simulation;
 
+        /// <summary>Construct a Renderer instance for a provided Simulation</summary>
         public Renderer(Simulation simulation)
         {
             this.simulation = simulation;
@@ -34,6 +36,7 @@ namespace CSharpGOL
                 Enumerable.Repeat(borderBase, displayWidth));
         }
 
+        /// <summary>Creates a visual representation of the current grid state by cell</summary>
         public void DrawFrame()
         {
             var frame = "";
@@ -55,6 +58,7 @@ namespace CSharpGOL
             currentFrame = frame;
         }
 
+        /// <summary>Displays the current frame combined with the header and footer</summary>
         public void RefreshFrame()
         {
             DrawFrame();
@@ -67,8 +71,10 @@ namespace CSharpGOL
             Console.WriteLine(header + "\n" + currentFrame + footer);
         }
 
+        /// <summary>Create a header given a display string, header width, and header character</summary>
         public string ConstructHeader(string stringToDisplay, int totalWidth, char headerBase)
         {
+            // Put a buffer of one space around display string for readability
             var innerBlock = stringToDisplay.PadCenter(stringToDisplay.Length + 2);
             
             return innerBlock.PadCenter(totalWidth, headerBase);

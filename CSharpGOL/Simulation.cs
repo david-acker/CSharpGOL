@@ -1,15 +1,26 @@
 namespace CSharpGOL
 {
+    /// <summary>
+    /// A new Game of Life instance
+    /// </summary>
     public class Simulation
     {
+        /// <summary>The number of rows for the Grid (in cells)</summary>
         public readonly int rowSize;
+        /// <summary>The number of columns for the Grid (in cells)</summary>
         public readonly int colSize;
 
+        /// <summary>The Grid state for the previous generation</summary>
         public Grid previousGrid;
+        /// <summary>The Grid state for the currrent generation</summary>
         public Grid currentGrid;
 
+        /// <summary>The generation number for the current Grid state</summary>
         public int generation { get; private set; } = 0;
 
+        /// <summary>
+        /// Create a new Simulation from a random seed given row and column sizes
+        /// </summary>
         public Simulation(int rowSize, int colSize)
         {
             this.rowSize = rowSize;
@@ -21,12 +32,18 @@ namespace CSharpGOL
             this.currentGrid = new Grid(seed);
         }
 
+        /// <summary>
+        /// Create a new Simulation from a specified seed
+        /// </summary>
         public Simulation(bool[,] initialState)
         {
             this.previousGrid = new Grid(initialState);
             this.currentGrid = new Grid(initialState);    
         }
 
+        /// <summary>
+        /// Update the Grid to the next generation based on the rules
+        /// </summary>
         public void NextGeneration()
         {
             previousGrid.FlashFrom(currentGrid);

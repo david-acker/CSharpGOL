@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CommandLine;
+using System.CommandLine.Invocation;
 using System.Diagnostics;
 using System.Threading;
 
@@ -6,50 +8,53 @@ namespace CSharpGOL
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <param name="height">Specifies the number of cells vertically as an int</param>
+        /// <param name="width">Specifies the number of cells horizontally as an int</param>
+        /// <param name="refresh">Specifies the minimum millisecond refresh time between frames as an int</param>
+        static void Main(int height = 0, int width = 0, int refresh = 100)
         {   
-            int rowSize;
-            int colSize;
-
-            Renderer renderer;
-            Simulation simulation;
-
-            const int refreshMilliseconds = 100;
-            Stopwatch stopWatch = new Stopwatch();
-
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
-
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            
+            if (height <= 0)
+                height = Console.WindowHeight - 3;
+            
+            if (width <= 0)
+                width = Console.WindowWidth / 2;
+
+            Console.CancelKeyPress += (sender, EventArgs) =>
+            {
+                Console.CursorVisible = true;
+                Environment.Exit(0);
+            };
+
             Console.CursorVisible = false;
+            RunSimulation(height, width, refresh);
+        }    
 
-            rowSize = Console.WindowHeight - 3;
-            colSize = Console.WindowWidth / 2;
+        static void RunSimulation(int rowSize, int colSize, int refreshBuffer)
+        {
+            var simulation = new Simulation(rowSize, colSize);
+            var renderer = new Renderer(simulation);           
+            
+            var stopWatch = new Stopwatch(); 
 
-            simulation = new Simulation(rowSize, colSize);
-            renderer = new Renderer(simulation);
-
-            renderer.RefreshFrame();  
+            renderer.RefreshFrame();
 
             while (true)
             {
                 stopWatch.Start();
                 simulation.NextGeneration();
                 stopWatch.Stop();
-                
-                int delta = refreshMilliseconds - (int)stopWatch.ElapsedMilliseconds;
-                if (delta > 0)
+
+                var bufferTimeDelta = refreshBuffer - (int)stopWatch.ElapsedMilliseconds;
+                if (bufferTimeDelta > 0)
                 {
-                    Thread.Sleep(delta);
+                    Thread.Sleep(bufferTimeDelta);
                 }
+
                 stopWatch.Reset();
 
                 renderer.RefreshFrame();
-            }
-
-            static void Console_CancelKeyPress(object sender, EventArgs e)
-            {
-                Console.CursorVisible = true;
-                Environment.Exit(0);
             }
         }
     }
