@@ -27,7 +27,7 @@ Option | Parameter | Type | Default
 -------|-----------|------|--------
 --height|grid height cells|int|*dependent on terminal window size*
 --width|grid width in cells|int|*dependent on terminal window size*
---refresh|minimum milliseconds between frames|int|100
+--refresh|minimum time between frames in milliseconds|int|100
 
 ---
 
