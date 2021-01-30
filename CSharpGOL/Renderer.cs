@@ -18,6 +18,8 @@ namespace CSharpGOL
         private string header;
         private string footer;
 
+        private string currentFrame;
+
         private Simulation simulation;
 
         public Renderer(Simulation simulation)
@@ -32,9 +34,9 @@ namespace CSharpGOL
                 Enumerable.Repeat(borderBase, displayWidth));
         }
 
-        public void RefreshFrame()
+        public void DrawFrame()
         {
-            string frame = "";
+            var frame = "";
             for (int i = 0; i < rowSize; i++)
             {
                 string line = "";
@@ -50,10 +52,19 @@ namespace CSharpGOL
                 line = line.Trim();
                 frame += line + "\n";
             }
+            currentFrame = frame;
+        }
+
+        public void RefreshFrame()
+        {
+            DrawFrame();
 
             header = ConstructHeader(
-                simulation.generation.ToString(), displayWidth, borderBase) + "\n";
-            Console.WriteLine(header + frame + footer);
+                simulation.generation.ToString(), 
+                displayWidth, 
+                borderBase);
+            
+            Console.WriteLine(header + "\n" + currentFrame + footer);
         }
 
         public string ConstructHeader(string stringToDisplay, int totalWidth, char headerBase)
