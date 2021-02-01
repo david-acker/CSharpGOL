@@ -8,9 +8,9 @@ namespace CSharpGOL
 {
     class Program
     {
-        /// <param name="height">Specifies the number of cells vertically as an int</param>
-        /// <param name="width">Specifies the number of cells horizontally as an int</param>
-        /// <param name="refresh">Specifies the minimum millisecond refresh time between frames as an int</param>
+        /// <param name="height">Specifies the number of cells vertically as an int.</param>
+        /// <param name="width">Specifies the number of cells horizontally as an int.</param>
+        /// <param name="refresh">Specifies the minimum millisecond refresh time between frames as an int.</param>
         static void Main(int height = 0, int width = 0, int refresh = 100)
         {   
             Console.OutputEncoding = System.Text.Encoding.UTF8;

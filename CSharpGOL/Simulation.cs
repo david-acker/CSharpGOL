@@ -1,25 +1,25 @@
 namespace CSharpGOL
 {
     /// <summary>
-    /// A new Game of Life instance
+    /// A new Game of Life instance.
     /// </summary>
     public class Simulation
     {
-        /// <summary>The number of rows for the Grid (in cells)</summary>
+        /// <summary>The number of rows for the Grid (in cells).</summary>
         public readonly int rowSize;
-        /// <summary>The number of columns for the Grid (in cells)</summary>
+        /// <summary>The number of columns for the Grid (in cells).</summary>
         public readonly int colSize;
 
-        /// <summary>The Grid state for the previous generation</summary>
+        /// <summary>The Grid state for the previous generation.</summary>
         public Grid previousGrid;
-        /// <summary>The Grid state for the currrent generation</summary>
+        /// <summary>The Grid state for the currrent generation.</summary>
         public Grid currentGrid;
 
-        /// <summary>The generation number for the current Grid state</summary>
+        /// <summary>The generation number for the current Grid state.</summary>
         public int generation { get; private set; } = 0;
 
         /// <summary>
-        /// Create a new Simulation from a random seed given row and column sizes
+        /// Create a new Simulation from a random seed given row and column sizes.
         /// </summary>
         public Simulation(int rowSize, int colSize)
         {
@@ -33,7 +33,7 @@ namespace CSharpGOL
         }
 
         /// <summary>
-        /// Create a new Simulation from a specified seed
+        /// Create a new Simulation from a specified seed.
         /// </summary>
         public Simulation(bool[,] initialState)
         {
@@ -42,16 +42,16 @@ namespace CSharpGOL
         }
 
         /// <summary>
-        /// Update the Grid to the next generation based on the rules
+        /// Update the Grid to the next generation based on the rules.
         /// </summary>
         public void NextGeneration()
         {
             previousGrid.FlashFrom(currentGrid);
             currentGrid.UpdateLivingNeighborsArray();
 
-            for (int i = 0; i < rowSize; i++)
+            for (var i = 0; i < rowSize; i++)
             {
-                for (int j = 0; j < colSize; j++)
+                for (var j = 0; j < colSize; j++)
                 {
                     bool cellState = currentGrid.state[i, j];
                     int neighborCount = currentGrid.livingNeighbors[i, j];
