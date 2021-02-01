@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using CSharpGOL.Common;
 
 namespace CSharpGOL
@@ -31,7 +32,7 @@ namespace CSharpGOL
             rowSize = simulation.rowSize;
             colSize = simulation.colSize;
 
-            displayWidth = (colSize * 2);
+            displayWidth = colSize * 2;
             footer = String.Concat(
                 Enumerable.Repeat(borderBase, displayWidth));
         }
@@ -39,28 +40,30 @@ namespace CSharpGOL
         /// <summary>Creates a visual representation of the current grid state by cell.</summary>
         public void DrawFrame()
         {
-            var frame = "";
+            var frame = new StringBuilder();
             for (var i = 0; i < rowSize; i++)
             {
-                string line = "";
+                var line = new StringBuilder(rowSize * 2);
                 for (var j = 0; j < colSize; j++)
                 {
                     bool cellState = simulation.currentGrid.state[i, j];
 
                     if (cellState)
-                        line += iconLive + " "; 
+                        line.Append(iconLive);
                     else
-                        line += iconDead + " ";
+                        line.Append(iconDead);
+                    
+                    line.Append(' ');
                 }
-                line = line.Trim();
-                frame += line + "\n";
+                frame.Append(line.ToString().Trim() + "\n");
             }
-            currentFrame = frame;
+            currentFrame = frame.ToString();
         }
 
         /// <summary>Displays the current frame combined with the header and footer.</summary>
         public void RefreshFrame()
         {
+            Console.Clear();
             DrawFrame();
 
             header = ConstructHeader(
