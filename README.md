@@ -16,7 +16,7 @@ Once launched, CSharpGOL automatically determines the dimensions (height and wid
 
 Internally, the state of the grid is stored as a 2D boolean array, where True and False correspond to live and dead cells respectively. When calculating the neighbors of for the the boundaries of the grid wrap around to the opposite side.
 
-Each generation, the state of the current grid is converted to a display string and printed to the console. A rudimentary timing mechanism is used to trigger an update of the display roughly every 100 ms to show show the evolution of the simulation over each successive generation and to ensure a relatively uniform "frame rate" (in order to prevent visual glitches/flashing). Optionally, this refresh period can be explicitly specified using its command line option. The number for the current generation is centered and displayed on a header row at the top of the terminal screen.
+Each generation, the state of the current grid is converted to a display string and printed to the console. The number for the current generation is centered and displayed on a header row at the top of the terminal screen. A rudimentary timing mechanism is used to trigger an update of the display roughly every 100 ms to show show the evolution of the simulation over each successive generation and to ensure a relatively uniform "frame rate" (in order to prevent visual glitches/flashing). Optionally, this refresh period can be explicitly specified using its command line option. The simulation can also be progressed manually by setting the auto option to false, in which the simultion will pause after every frame and requires (any) keyboard input from the user to move to the next generation and trigger the display of a new frame.
 
 To end the simulation and exit, use CTRL-C. CSharpGOL does not currently have an automatic exit mechanism to detect when the grid for the simulation becomes completely static and unchanging, or becomes comprised only of still life and/or oscillator patterns. 
 
@@ -28,6 +28,7 @@ Option | Parameter | Type | Default
 --height|grid height cells|int|*dependent on terminal window size*
 --width|grid width in cells|int|*dependent on terminal window size*
 --refresh|minimum time between frames in milliseconds|int|100
+--auto|whether the simulation automatically progresses|bool|true
 
 ---
 
