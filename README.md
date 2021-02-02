@@ -28,7 +28,7 @@ Option | Parameter | Type | Default
 --height|grid height cells|int|*dependent on terminal window size*
 --width|grid width in cells|int|*dependent on terminal window size*
 --refresh|minimum time between frames in milliseconds|int|100
---auto|whether the simulation automatically progresses|bool|true
+--auto|if the simulation will automatically progress|bool|true
 
 ---
 
