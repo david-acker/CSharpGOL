@@ -11,7 +11,8 @@ namespace CSharpGOL
         /// <param name="height">Specifies the number of cells vertically as an int.</param>
         /// <param name="width">Specifies the number of cells horizontally as an int.</param>
         /// <param name="refresh">Specifies the minimum millisecond refresh time between frames as an int.</param>
-        static void Main(int height = 0, int width = 0, int refresh = 100)
+        /// <param name="auto">Specifies if the simulation will automatically progress forward.</param>
+        static void Main(int height = 0, int width = 0, int refresh = 100, bool auto = true)
         {   
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             
@@ -28,30 +29,33 @@ namespace CSharpGOL
             };
 
             Console.CursorVisible = false;
-            RunSimulation(height, width, refresh);
+
+            var simulation = new Simulation(height, width);
+            var renderer = new Renderer(simulation);
+
+            RunSimulation(simulation, renderer, refresh, auto);
         }    
 
-        static void RunSimulation(int rowSize, int colSize, int refreshBuffer)
+        static void RunSimulation(Simulation simulation, Renderer renderer, int refreshBuffer, bool isAuto)
         {
-            var simulation = new Simulation(rowSize, colSize);
-            var renderer = new Renderer(simulation);           
-            
-            var stopWatch = new Stopwatch(); 
+            var stopWatch = new Stopwatch();
 
+            // Display the initial Grid state.
             renderer.RefreshFrame();
 
             while (true)
             {
+                if (!isAuto)
+                    Console.ReadLine();
+
                 stopWatch.Start();
                 simulation.NextGeneration();
                 stopWatch.Stop();
 
-                var bufferTimeDelta = refreshBuffer - (int)stopWatch.ElapsedMilliseconds;
-                if (bufferTimeDelta > 0)
-                {
-                    Thread.Sleep(bufferTimeDelta);
-                }
-
+                var timeDeltaBuffer = refreshBuffer - (int)stopWatch.ElapsedMilliseconds;
+                if (timeDeltaBuffer > 0)
+                    Thread.Sleep(timeDeltaBuffer);
+                
                 stopWatch.Reset();
 
                 renderer.RefreshFrame();
