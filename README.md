@@ -27,7 +27,7 @@ Option | Parameter | Type | Default
 --randomize-density|Whether to use a random density every time the simulation restarts.|bool|true
 --seed|An optional integer for seeding the random number generator.|int|*uses default system seed*
 
-Note: The default values for the command line options are set in 'appsettings.json'.
+Note: The default values for the command line options can be modified in 'appsettings.json'.
 
 ---
 
