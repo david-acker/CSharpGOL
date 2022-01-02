@@ -4,23 +4,12 @@ C# Implementation of Conway's Game of Life
 ## Background
 The [The Game of Life] is the [cellular automaton] created by the late mathematician [John Conway].
 
-Using a 2D grid, each square on the grid is considered a cell which can be in one of two possible states: live or dead. Each generation the grid is updated, the cells 'interact' with the eight neighbor cells immediately surrounding them and change state according to the following rules:
+Using a 2D grid, each square on the grid is considered a cell which can be in one of two possible states: live or dead. Over successive generations, the state of a given cell changes based on the eight neighboring cells in the cell's immediate surroundings:
 
 * A live cell that has two or three live neighbors survives
 * A dead cell with exactly three live neighbors becomes a live cell
 * All other live cells die out
 * All other dead cells remain dead
-
-## Usage
-Once launched, CSharpGOL automatically determines the dimensions (height and width) of the terminal instance it was in which it was run and generates a grid to match these dimensions. The height and/or width dimensions can also be explicity specified using their corresponding command line options. This The individual cells in this starting grid are randomly set as live or dead, to create the initial state for the simulation.
-
-Internally, the state of the grid is stored as a 2D boolean array, where True and False correspond to live and dead cells respectively. When calculating the neighbors of for the the boundaries of the grid wrap around to the opposite side.
-
-Each generation, the state of the current grid is converted to a display string and printed to the console. The number for the current generation is centered and displayed on a header row at the top of the terminal screen. A rudimentary timing mechanism is used to trigger an update of the display roughly every 100 ms to show show the evolution of the simulation over each successive generation and to ensure a relatively uniform "frame rate" (in order to prevent visual glitches/flashing). Optionally, this refresh period can be explicitly specified using its command line option. The simulation can also be progressed manually by setting the auto option to false, in which the simultion will pause after every frame and requires (any) keyboard input from the user to move to the next generation and trigger the display of a new frame.
-
-To end the simulation and exit, use CTRL-C. CSharpGOL does not currently have an automatic exit mechanism to detect when the grid for the simulation becomes completely static and unchanging, or becomes comprised only of still life and/or oscillator patterns. 
-
-Note: Thus far, CSharpGOL has only been tested with the default GNOME Terminal for Ubuntu Desktop (Focal Fossa) and may be displayed differently on other platforms.  
 
 ## Command Line Options
 Option | Parameter | Type | Default
@@ -29,6 +18,24 @@ Option | Parameter | Type | Default
 --width|grid width in cells|int|*dependent on terminal window size*
 --refresh|minimum time between frames in milliseconds|int|100
 --auto|if the simulation will automatically progress|bool|true
+
+## Command Line Options
+Option | Parameter | Type | Default
+-------|-----------|------|--------
+--height|The height of the cell grid.|int|*dependent on terminal window size*
+--width|The width of the cell grid.|int|*dependent on terminal window size*
+--refresh-rate|The minimum time between frames, in milliseconds.|int|50
+--living-cell|The character displayed for a living cell.|char|'X'
+--dead-cell|The character displayed for a dead cell.|char|' '
+--header|The character displayed for the header bar.|char|'_'
+--show-header|Whether to display the generation number header.|bool|true
+--look-back-window|The number of previous frames included when checking if the simulation has reached a steady state.|int|5
+--loop|Whether to restart the simulation from its initial state, once the simulation has reached a steady state.|bool|false
+--density|The density of living cells when randomly generating the cell grid. Ranges from 1 (10%) to 9 (90%).|int|5
+--randomize-density|Whether to use a random density every time the simulation restarts.|bool|true
+--seed|An optional integer for seeding the random number generator.|int|*uses default system seed*
+
+Note: The default values for the command line options are set in 'appsettings.json'.
 
 ---
 
