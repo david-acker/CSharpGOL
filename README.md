@@ -14,14 +14,6 @@ Using a 2D grid, each square on the grid is considered a cell which can be in on
 ## Command Line Options
 Option | Parameter | Type | Default
 -------|-----------|------|--------
---height|grid height cells|int|*dependent on terminal window size*
---width|grid width in cells|int|*dependent on terminal window size*
---refresh|minimum time between frames in milliseconds|int|100
---auto|if the simulation will automatically progress|bool|true
-
-## Command Line Options
-Option | Parameter | Type | Default
--------|-----------|------|--------
 --height|The height of the cell grid.|int|*dependent on terminal window size*
 --width|The width of the cell grid.|int|*dependent on terminal window size*
 --refresh-rate|The minimum time between frames, in milliseconds.|int|50
